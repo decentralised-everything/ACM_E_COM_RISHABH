@@ -1,15 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
+const cookieParser = require("cookie-parser");
+const { requireAuth, checkUser } = require("./middleware/authMiddleware");
 
 const app = express();
 
 // middleware
 app.use(express.static("public"));
-
-// computer can't read object, goes bleep bloop, json helps computer go brrr
-// thereafter, we can use these objects to authenticate or make dynamic frontend
 app.use(express.json());
+app.use(cookieParser());
 
 // view engine
 app.set("view engine", "ejs");
@@ -26,10 +26,9 @@ mongoose
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
 
-//routes to different /pages and the defualt views.ejs each uses
-app.get("/", (req, res) => res.render("home"));
-app.get("/smoothies", (req, res) => res.render("smoothies"));
+// routes to different /pages and the defualt views.ejs each uses
 
-//instead of placing those routes here,
-//connected using.use method
+app.get("/", (req, res) => res.render("home"));
+// requireAuth now can be implemented on any page
+app.get("/smoothies", requireAuth, (req, res) => res.render("smoothies"));
 app.use(authRoutes);
