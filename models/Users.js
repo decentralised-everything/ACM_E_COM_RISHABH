@@ -21,9 +21,9 @@ const userSchema = new mongoose.Schema({
 
 // "pre" method, fires the function before saving to DB
 userSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt(); // genSalt is async method, mention async explicitely
+  // const salt = await bcrypt.genSalt(); // genSalt is async method, mention async explicitely
   // "this" refers to the current user being created
-  this.password = await bcrypt.hash(this.password, salt);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 

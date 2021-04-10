@@ -1,3 +1,4 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const requireAuth = (req, res, next) => {
@@ -5,7 +6,7 @@ const requireAuth = (req, res, next) => {
 
   // check json web token exists & is verified
   if (token) {
-    jwt.verify(token, "rishabh got 9 CG", (err, decodedToken) => {
+    jwt.verify(token, process.env.secret, (err, decodedToken) => {
       if (err) {
         console.log(err.message);
         res.redirect("/login");
@@ -23,7 +24,7 @@ const requireAuth = (req, res, next) => {
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, "rishabh got 9 CG", async (err, decodedToken) => {
+    jwt.verify(token, process.env.secret, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
         next();

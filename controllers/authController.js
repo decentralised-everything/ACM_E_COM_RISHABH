@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("../models/Users");
 const jwt = require("jsonwebtoken");
 
@@ -41,7 +42,7 @@ user and saves it, so that user can stay logged for certain time
 even though they close their tabs*/
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, "rishabh got 9 CG", {
+  return jwt.sign({ id }, process.env.secret, {
     expiresIn: maxAge,
   });
 };
