@@ -34,4 +34,6 @@ app.get("/profile", requireAuth, (req, res) => res.render("profile"));
 // made some default templates for frontend implementation purposes
 // do implement "requireAuth" for each sensitive pages for updation, bidding and marketplace
 app.use("/api/profile", require("./routes/profile"));
+app.use("/api/marketplace", require("./routes/marketplace"));
+app.use("/api/bidding", require("./routes/bidding"));
 app.use(authRoutes);

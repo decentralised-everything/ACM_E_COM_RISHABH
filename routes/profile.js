@@ -1,21 +1,14 @@
 const { Router } = require("express");
-const User = require("../models/Users");
+const FindUser = require("../config/FindUser");
+const UpdateUserData = require("../config/UpdateUserData");
 
 const router = Router();
 
-router.post("/:email", async (req, res) => {
-  const { email } = req.params;
-  const user = req.user;
-  if (email === req.user.email) {
-  }
-  res.json(user);
-});
+/* "UpdateUserData" authenticates if the "User" owning the profile updates the profile */
+router.post("/:email", UpdateUserData, FindUser);
 
-router.get("/:email", async (req, res) => {
-  const { email } = req.params;
-  const user = users.find((user) => (user.email = email));
-
-  res.json(user);
-});
+/* "FindUser" obtains the right "user" data using email as a unique token, and any (only) "User"
+can view each other */
+router.get("/:email", FindUser);
 
 module.exports = router;
