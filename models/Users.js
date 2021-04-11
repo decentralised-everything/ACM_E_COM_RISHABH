@@ -17,13 +17,17 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please enter a password"],
     minlength: [6, "Minimum password length is 6 characters"],
   },
+  wallet: {
+    // wallet that will be used to bid
+    type: Number,
+    required: true,
+    default: 5000,
+  },
 });
 
 // "pre" method, fires the function before saving to DB
 userSchema.pre("save", async function (next) {
-  // const salt = await bcrypt.genSalt(); // genSalt is async method, mention async explicitely
-  // "this" refers to the current user being created
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password, 10); // cryptofying the password, default salt length is 10
   next();
 });
 
@@ -32,7 +36,7 @@ userSchema.statics.login = async function (email, password) {
   // find that one valid email for login
   const user = await this.findOne({ email });
   if (user) {
-    // converting input password into hash and comparing with database
+    // converting input password into hash and comparing with database hash
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {
       return user;
@@ -46,6 +50,6 @@ userSchema.statics.login = async function (email, password) {
 singular form of name of database collection which 
 in our case is "users"
 */
-const User = mongoose.model("user", userSchema);
+const Users = mongoose.model("user", userSchema);
 
-module.exports = User;
+module.exports = Users;

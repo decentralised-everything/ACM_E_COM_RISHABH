@@ -1,10 +1,10 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
+// user authentication, verifying JWT token present or not
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
 
-  // check json web token exists & is verified
   if (token) {
     jwt.verify(token, process.env.secret, (err, decodedToken) => {
       if (err) {
@@ -21,6 +21,7 @@ const requireAuth = (req, res, next) => {
 };
 
 // check current user
+// giving errors, so avoided implementation
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {

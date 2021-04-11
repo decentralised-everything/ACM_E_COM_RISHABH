@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
-const { requireAuth, checkUser } = require("./middleware/authMiddleware");
+const { requireAuth } = require("./middleware/authMiddleware");
 
 const app = express();
 
@@ -26,9 +26,12 @@ mongoose
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
 
-// routes to different /pages and the defualt views.ejs each uses
-
 app.get("/", (req, res) => res.render("home"));
 // requireAuth now can be implemented on any page
 app.get("/smoothies", requireAuth, (req, res) => res.render("smoothies"));
+app.get("/profile", requireAuth, (req, res) => res.render("profile"));
+
+// made some default templates for frontend implementation purposes
+// do implement "requireAuth" for each sensitive pages for updation, bidding and marketplace
+app.use("/api/profile", require("./routes/profile"));
 app.use(authRoutes);
