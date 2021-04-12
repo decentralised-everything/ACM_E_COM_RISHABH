@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 5000,
   },
+  bioData: {
+    type: String,
+    required: true,
+    default: "This is a general User",
+  },
 });
 
 // "pre" method, fires the function before saving to DB

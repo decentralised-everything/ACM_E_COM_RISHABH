@@ -6,9 +6,13 @@ const UpdateUserData = async (req, res) => {
   const { email } = req.params;
 
   if (email === res.locals.user.name) {
-    await Users.findOneAndUpdate({ email: email }, {});
+    try {
+      await Users.findOneAndUpdate({ email: email }, {});
+    } catch (error) {
+      res.status(500).send(error);
+    }
   } else {
-    res.send("Only User of this profile can update");
+    res.send(`Only ${email} can update`);
     res.end();
   }
 };

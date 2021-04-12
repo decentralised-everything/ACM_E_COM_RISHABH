@@ -8,7 +8,7 @@ const bidderSchema = new mongoose.Schema({
     ref: "Users",
     required: true,
   },
-  bidWallet: {
+  wallet: {
     // will be indirectly connected to "User Wallet", will be verified each time using authentication functions
     type: Number,
     required: true,

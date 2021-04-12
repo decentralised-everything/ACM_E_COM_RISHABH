@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const FindUser = require("../config/FindUser");
-const UpdateUserData = require("../config/UpdateUserData");
+const FindUser = require("../middleware/FindUser");
+const UpdateUserData = require("../middleware/UpdateUserData");
 
 const router = Router();
 
