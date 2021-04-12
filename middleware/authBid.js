@@ -2,7 +2,7 @@ const bidderBid = require("../models/Users");
 
 // required to authenticate every bid before being added
 const authBid = async (req, res, next) => {
-  if (req.locals.object.sellerUser._id === res.body.bidderBid.id) {
+  if (res.locals.object.sellerUser._id === req.body.bidderBid.id) {
     console.log(
       "seller can set the MRP without any restriction i.e. the very first bid"
     );
