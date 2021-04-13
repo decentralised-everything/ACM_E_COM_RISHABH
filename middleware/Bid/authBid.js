@@ -1,4 +1,4 @@
-const bidderBid = require("../models/Users");
+const bidderBid = require("../../models/Users");
 
 // required to authenticate every bid before being added
 const authBid = async (req, res, next) => {

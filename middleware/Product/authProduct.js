@@ -1,4 +1,4 @@
-const Products = require("../models/Products");
+const Products = require("../../models/Products");
 
 const authProduct = async (req, res, next) => {
   // "email" used token for authentication

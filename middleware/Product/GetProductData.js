@@ -1,4 +1,4 @@
-const Product = require("../models/Products");
+const Product = require("../../models/Products");
 
 // role of this function is to obtain the highest bid on the product from the "bids" array
 const GetProductData = async (req, res, next) => {

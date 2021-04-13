@@ -1,4 +1,4 @@
-const Users = require("../models/Users");
+const Users = require("../../models/Users");
 
 // profile update, authentication token being email in this case since its unique and criteria of login as well
 // implement authorization middleware for redirection and on each subsequent credential pages

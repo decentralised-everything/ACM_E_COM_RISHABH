@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please enter a password"],
     minlength: [6, "Minimum password length is 6 characters"],
   },
+  img: {
+    data: Buffer,
+    contentType: String,
+  },
   wallet: {
     // wallet that will be used to bid
     type: Number,

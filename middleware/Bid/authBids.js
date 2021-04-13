@@ -1,4 +1,4 @@
-const Users = require("../models/Users");
+const Users = require("../../models/Users");
 
 const authBids = () => {
   // object refers to "object" on the page

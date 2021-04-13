@@ -1,4 +1,4 @@
-const Users = require("../models/Users");
+const Users = require("../../models/Users");
 const GetUser = async (req, res) => {
   //
   // using "email" as a token to find the user from the database since "email" is unique
