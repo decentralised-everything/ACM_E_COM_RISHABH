@@ -15,6 +15,10 @@ const productsSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  img: {
+    data: Buffer,
+    contentType: String,
+  },
   bids: [
     // bids will be an array of mutiple bids by mutiple "users" for a "product" owned by "sellerUser"
     {
