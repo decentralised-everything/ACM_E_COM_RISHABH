@@ -13,6 +13,7 @@ const authBids = () => {
         return res.end();
       } else {
         if (bid.wallet > user.wallet) {
+          // won't be removing seller bid because it is the basis of minimum price
           if (res.locals.object.sellerUser._id === user.id) {
             console.log(
               "Seller can't be removed, they decide MRP / very first bid, does not depend wallet"
