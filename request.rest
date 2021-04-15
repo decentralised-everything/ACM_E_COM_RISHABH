@@ -1,3 +1,4 @@
-GET http://localhost:3000/logout
+GET http://localhost:3000
 Content-Type: application/json
+
 

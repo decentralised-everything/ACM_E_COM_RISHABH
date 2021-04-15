@@ -1,5 +1,6 @@
 const Users = require("../../models/Users");
 
+let req, res;
 const authBids = () => {
   // object refers to "object" on the page
   for (let i = 0; i < res.locals.object.bids.length; i++) {
@@ -16,7 +17,7 @@ const authBids = () => {
           // won't be removing seller bid because it is the basis of minimum price
           if (res.locals.object.sellerUser._id === user.id) {
             console.log(
-              "Seller can't be removed, they decide MRP / very first bid, does not depend wallet"
+              "Seller can't be removed, they decide MRP / very first bid, does not depend on wallet"
             );
           } else {
             /* imposter alert / well, it can be used as a flexibility of doing 
@@ -43,6 +44,8 @@ const authBids = () => {
 };
 
 const startAuth = async (req, res, next) => {
+  req = req;
+  res = res;
   authRun = setInterval(authBids, 600000);
   // authenticator authenticates at every 10mins of interval
   // ensuring server does not lag a lot due to mutiple authentications, 10mins is kept
