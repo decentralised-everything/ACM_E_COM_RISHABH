@@ -5,14 +5,20 @@ const Users = require("../../models/Users");
 const UpdateUserData = async (req, res) => {
   const { email } = req.params;
 
-  if (email === res.locals.user.name) {
+  if (email === res.locals.user.email) {
     try {
-      await Users.findOneAndUpdate({ email: email }, {});
+      delete req.body._id;
+      delete req.body.password;
+      delete req.body.email;
+
+      await Users.findOneAndUpdate({ name: res.locals.user.email }, req.body);
+      console.log("removed");
     } catch (error) {
-      res.status(500).send(error);
+      res.send(error);
     }
   } else {
     res.send(`Only ${email} can update`);
+
     res.end();
   }
 };

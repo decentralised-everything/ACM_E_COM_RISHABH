@@ -1,21 +1,17 @@
 const Users = require("../../models/Users");
-const GetUserData = async (req, res, next) => {
-  //
-  // using email as a criteria to find user (since its unique to each user)
-  const { email } = req.params;
-  await Users.findOne({ email: email }, (err, userData) => {
-    if (err) {
-      return res.status(403).send(err);
-      // either the data was corrupted or name entered didn't exist (or idk)
-    } else {
-      // first we need to convert the data to JSON, then only "json stuff" can be applied, gosh
-      userData = JSON.parse(JSON.stringify(userData));
-      // "json stuff" to remove specific data extracted from database that shouldn't be displayed
-      delete userData.password;
-      delete userData._id;
 
-      // displaying user (data) without "id" and "password"
-      res.send(userData);
+const GetUserData = async (req, res, next) => {
+  const { name } = req.params;
+
+  Users.findOne({ name: name }, (err, user) => {
+    if (err) return res.status(403).send(err);
+    else {
+      user = JSON.parse(JSON.stringify(user));
+
+      delete user._id;
+      delete user.password;
+
+      res.send(user);
       next();
     }
   });
