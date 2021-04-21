@@ -43,14 +43,18 @@ const authBids = () => {
   }
 };
 
+// starting of authenticator will be triggered on addition of very first bid
 const startAuth = async (req, res, next) => {
   req = req;
   res = res;
+
+  // the function will be exported through startAuth module
   authRun = setInterval(authBids, 600000);
   // authenticator authenticates at every 10mins of interval
-  // ensuring server does not lag a lot due to mutiple authentications, 10mins is kept
   next();
 };
+
+// stops authentication, the "startAuth" that loops "authBids"
 const stopAuth = () => {
   clearInterval(authRun);
 };

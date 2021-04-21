@@ -2,7 +2,9 @@ const Products = require("../../models/Products");
 const Bids = require("../../models/Bidder");
 
 /* the function creates "Product", also populates the "bids" array with "bid" which 
-is "bidderUser" */
+is "bidderUser" 
+"addBid" has created instance of "bid" and has stored the bid in "wallet" now it's the 
+"Product" database that needs to be filled with the data */
 
 const authProduct = async (req, res, next) => {
   try {
@@ -15,16 +17,17 @@ const authProduct = async (req, res, next) => {
     // creating new instance of "Product"
     res.locals.object = await Products.create({
       sellerUser: res.locals.user._id, // required "id"
-      price: req.body.price,
+      price: req.body.price, // basic "price" set by "seller"
     });
 
     // passing in the "bid" into "bids" array
-    res.locals.object.bids.push(bid);
-    res.locals.object.save();
+    res.locals.object.bids.push(bid); // adding in the "array"
+    res.locals.object.save(); // saving the whole object
 
     next();
   } catch (err) {
     return res.status(500).send(err);
+    // kaal se pehle yahi tha, kaal ke baad yahi
   }
 };
 
